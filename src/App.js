@@ -1,18 +1,36 @@
 import LoginForm from "./component/LoginForm";
 import Header from "./component/Header";
 import Home from "./component/Home/Home";
+import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import { logOut } from "./firebase";
 
 import "./App.css";
 
 function App() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+
   return (
     <div className='container'>
       <Header />
       <Routes>
-        <Route exact path='/' element={<LoginForm />} />
-        <Route path='/home' element={<Home />} />
+        <Route
+          exact
+          path='/'
+          element={
+            <LoginForm
+              email={email}
+              password={password}
+              setPassword={setPassword}
+              setEmail={setEmail}
+              name={name}
+              setName={setName}
+            />
+          }
+        />
+        <Route path='/home' element={<Home userName={name} />} />
       </Routes>
       <Link to='/' onClick={logOut}>
         Log Out

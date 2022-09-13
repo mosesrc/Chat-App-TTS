@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { registerWithEmailAndPassword } from "../../firebase";
 
-function SignIn({ email, password, setEmail, setPassword }) {
+function SignIn({ email, password, setEmail, setPassword, name, setName }) {
   const navigate = useNavigate();
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    await registerWithEmailAndPassword(email, password);
+    await registerWithEmailAndPassword(name, email, password);
     await navigate("/home");
   };
 
@@ -17,6 +17,20 @@ function SignIn({ email, password, setEmail, setPassword }) {
         <h3>Register</h3>
       </div>
       <div className='col-12'>
+        <div class='mb-3'>
+          <label htmlFor='exampleInputText' className='form-label'>
+            Please Enter Your Name:
+          </label>
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            type='text'
+            className='form-control'
+            id='exampleInputText'
+            aria-describedby='Name'
+            placeholder='Enter name'
+          />
+        </div>
         <div className='mb-3'>
           <label htmlFor='emailAddress' className='form-label'>
             Email Address

@@ -3,3 +3,7 @@
   min-height: 50vh;
   /* margin-bottom: 100px; */
 }
+
+#chat-message-input {
+  height: 10vh;
+}

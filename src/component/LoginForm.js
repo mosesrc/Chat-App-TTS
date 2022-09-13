@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
@@ -9,9 +9,7 @@ import {
 } from "../firebase";
 import SignIn from "./SignIn/sign_in";
 
-function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function LoginForm({ email, password, setEmail, setPassword, name, setName }) {
   const [user, loading, error] = useAuthState(auth);
 
   const navigate = useNavigate();
@@ -101,6 +99,8 @@ function LoginForm() {
         password={password}
         setEmail={setEmail}
         setPassword={setPassword}
+        name={name}
+        setName={setName}
       />
     </>
   );

@@ -45,8 +45,8 @@ const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
+    console.log(user);
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
-    console.log(q);
     const docs = await getDocs(q);
     console.log(docs);
     if (docs.docs.length === 0) {
@@ -94,17 +94,20 @@ const logInWithEmailAndPassword = async (email, password) => {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
     console.error(err);
-    alert(err.message);
+    alert(
+      "User was not found please register your email and password!" +
+        "\n" +
+        err.message
+    );
   }
 };
 
-const registerWithEmailAndPassword = async (name, email, password) => {
+const registerWithEmailAndPassword = async (email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
     await addDoc(collection(db, "users"), {
       uid: user.uid,
-      name,
       authProvider: "local",
       email,
     });
@@ -124,7 +127,7 @@ const sendPasswordReset = async (email) => {
   }
 };
 
-const logout = () => {
+const logOut = () => {
   signOut(auth);
 };
 
@@ -136,5 +139,5 @@ export {
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
   sendPasswordReset,
-  logout,
+  logOut,
 };

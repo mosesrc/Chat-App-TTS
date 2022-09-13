@@ -1,5 +1,8 @@
 import LoginForm from "./component/LoginForm";
 import Header from "./component/Header";
+import Home from "./component/Home/Home";
+import { Routes, Route, Link } from "react-router-dom";
+import { logOut } from "./firebase";
 
 import "./App.css";
 
@@ -7,7 +10,13 @@ function App() {
   return (
     <div className='container'>
       <Header />
-      <LoginForm />
+      <Routes>
+        <Route exact path='/' element={<LoginForm />} />
+        <Route path='/home' element={<Home />} />
+      </Routes>
+      <Link to='/' onClick={logOut}>
+        Log Out
+      </Link>
     </div>
   );
 }

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
   auth,
@@ -6,11 +7,17 @@ import {
   signInWithGoogle,
   signInWithFacebook,
 } from "../firebase";
+import SignIn from "./SignIn/sign_in";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user) navigate("/home");
+  });
 
   if (error) {
     return (
@@ -22,70 +29,80 @@ function LoginForm() {
   if (loading) {
     return <p>Loading...</p>;
   }
-  // if (user) {
-  //   return (
-  //     <div>
-  //       <p>Registered User: {user.email}</p>
-  //     </div>
-  //   );
-  // }
 
   return (
-    <form
-      onSubmit={() => logInWithEmailAndPassword(email, password)}
-      className='row'
-    >
-      <div className='col-12'>
-        <h3>Login Form</h3>
-      </div>
-      <div className='col-12'>
-        <div className='mb-3'>
-          <label htmlFor='emailAddress' className='form-label'>
-            Email Address
-          </label>
-          <input
-            type='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className='form-control'
-            id='emailAddress'
-            placeholder='Email Address: name@example.com'
-          />
+    <>
+      <form
+        onSubmit={() => logInWithEmailAndPassword(email, password)}
+        className='row'
+        id='form1'
+      >
+        <div className='col-12'>
+          <h3>Login Form</h3>
         </div>
-        <div className='mb-3'>
-          <label htmlFor='userPassword' className='form-label'>
-            Password
-          </label>
-          <input
-            type='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className='form-control'
-            id='userPassword'
-            placeholder='Enter password'
-          />
+        <div className='col-12'>
+          <div className='mb-3'>
+            <label htmlFor='emailAddress' className='form-label'>
+              Email Address
+            </label>
+            <input
+              type='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className='form-control'
+              id='emailAddress'
+              placeholder='Email Address: name@example.com'
+            />
+          </div>
+          <div className='mb-3'>
+            <label htmlFor='userPassword' className='form-label'>
+              Password
+            </label>
+            <input
+              type='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className='form-control'
+              id='userPassword'
+              placeholder='Enter password'
+            />
+          </div>
         </div>
-      </div>
-      <div className='col'>
-        <div className='btn-group' role='group' aria-label='Basic example'>
-          <input type='submit' className='btn btn-primary' value='Submit' />
-          <button
-            type='button'
-            onClick={signInWithGoogle}
-            className='btn btn-success'
-          >
-            Google Sign In
-          </button>
-          <button
-            type='button'
-            onClick={signInWithFacebook}
-            className='btn btn-info'
-          >
-            Facebook Sign in
-          </button>
+        <div className='col'>
+          <div className='btn-group' role='group' aria-label='Basic example'>
+            <input
+              type='submit'
+              className='btn btn-primary'
+              value='Submit'
+              form='form1'
+            />
+            <button
+              type='button'
+              onClick={signInWithGoogle}
+              className='btn btn-success'
+            >
+              Google Sign In
+            </button>
+            <button
+              type='button'
+              onClick={signInWithFacebook}
+              className='btn btn-info'
+            >
+              Facebook Sign in
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+      <br />
+      <h4>OR</h4>
+      <br />
+      <SignIn
+        email={email}
+        password={password}
+        setEmail={setEmail}
+        setPassword={setPassword}
+      />
+    </>
   );
 }
 

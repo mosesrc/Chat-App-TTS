@@ -11,10 +11,14 @@ import SignIn from "./SignIn/sign_in";
 
 function LoginForm({ email, password, setEmail, setPassword, name, setName }) {
   const [user, loading, error] = useAuthState(auth);
+  console.log(user);
 
   const navigate = useNavigate();
   useEffect(() => {
-    if (user) navigate("/home");
+    if (user) {
+      const { displayName, email: userEmail } = user;
+      navigate("/home", { state: { displayName, userEmail } });
+    }
   });
 
   if (error) {

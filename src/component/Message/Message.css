@@ -1,4 +1,37 @@
 .message {
   height: 100px;
+  margin-top: 20px;
+  margin-left: 90px;
+  margin-bottom: 30px;
   background-color: lightskyblue;
+}
+
+.user-title {
+  background-color: goldenrod;
+  padding: 10px;
+  width: fit-content;
+  border-radius: 8px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  margin: 0;
+}
+.time-block {
+  background-color: green;
+  padding: 5px;
+  width: 85px;
+  border-radius: 8px;
+  text-align: center;
+  color: #fff;
+  margin: 0;
+}
+
+.message-text {
+}
+
+.message-left {
+  margin-left: 90px;
+}
+
+.message-right {
+  margin-right: 90px;
 }

@@ -8,7 +8,7 @@ function SignIn({ email, password, setEmail, setPassword, name, setName }) {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     await registerWithEmailAndPassword(name, email, password);
-    await navigate("/home");
+    await navigate("/home", { state: { displayName: name, userEmail: email } });
   };
 
   return (
@@ -17,7 +17,7 @@ function SignIn({ email, password, setEmail, setPassword, name, setName }) {
         <h3>Register</h3>
       </div>
       <div className='col-12'>
-        <div class='mb-3'>
+        <div className='mb-3'>
           <label htmlFor='exampleInputText' className='form-label'>
             Please Enter Your Name:
           </label>

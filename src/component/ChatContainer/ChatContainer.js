@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import "./ChatContainer.css";
 import Message from "../Message/Message";
 
-function ChatContainer({ userName }) {
-  // const [userName, setUserName] = useState(email);
-  // const [messageText, setMessageText] = useState();
-  // const [sentTime, setSentTime] = useState(Date.now());
+function ChatContainer({ userInfo }) {
+  // console.log("\n In Chat Container");
+  // console.log("\n Out of Chat Container");
 
   const [messageList, setMessageList] = useState([]);
 
   const messageObj = {
-    userName,
-    sentTime: Date.now(),
+    user: userInfo.userEmail,
+    sentTime: new Date(),
     messageText: "",
   };
 
@@ -28,8 +27,11 @@ function ChatContainer({ userName }) {
 
   return (
     <div className='container d-flex flex-column justify-content-between chat-container p-3 rounded-4'>
-      <Message messageList={messageList} />
-      <Message messageList={messageList} />
+      {messageList.map((item, idx) => (
+        <div key={idx}>
+          <Message item={item} />
+        </div>
+      ))}
 
       <form className='row' onSubmit={submitMessage}>
         <div className='col-10'>

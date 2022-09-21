@@ -1,7 +1,8 @@
 .chat-container {
   background-color: rgb(40, 66, 216);
-  min-height: 50vh;
+  max-height: 60vh;
   /* margin-bottom: 100px; */
+  overflow-y: auto;
 }
 
 #chat-message-input {

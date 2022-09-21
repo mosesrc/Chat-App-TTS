@@ -11,6 +11,7 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [messagePlacement, setMessagePlacement] = useState([]);
 
   return (
     <div className='container'>
@@ -27,6 +28,7 @@ function App() {
               setEmail={setEmail}
               name={name}
               setName={setName}
+              setMessagePlacement={setMessagePlacement}
             />
           }
         />

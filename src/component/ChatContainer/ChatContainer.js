@@ -33,7 +33,10 @@ function ChatContainer({ userInfo }) {
         </div>
       ))}
 
-      <form className='row' onSubmit={submitMessage}>
+      <form
+        className='row d-flex justify-content-center my-4'
+        onSubmit={submitMessage}
+      >
         <div className='col-10'>
           <div className='form-floating'>
             <textarea
@@ -44,7 +47,7 @@ function ChatContainer({ userInfo }) {
             <label htmlFor='chat-message-input'>Input your text</label>
           </div>
         </div>
-        <div className='col-2'>
+        <div className='col-1'>
           <button className='btn btn-secondary' type='submit'>
             <i className='bi bi-send-fill'></i>
           </button>

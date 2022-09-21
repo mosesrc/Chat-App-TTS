@@ -4,8 +4,8 @@ import "./Message.css";
 function Message({ item }) {
   console.log("\n In the Message Component: ");
   console.log(item);
-  let count = 0;
-  const calcOvrPos = count % 2 === 0;
+  let countInner = 0;
+  const calcOvrPos = countInner % 2 === 0;
 
   let messageSide = calcOvrPos
     ? "justify-content-start"

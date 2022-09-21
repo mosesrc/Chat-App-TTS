@@ -5,10 +5,19 @@ function Message({ item }) {
   console.log("\n In the Message Component: ");
   console.log(item);
   let count = 0;
+  const calcOvrPos = count % 2 === 0;
 
-  let side = count % 2 === 0 ? "justify-content-start" : "justify-content-end";
-  const userTitlePos = "position-absolute top-0 start-0 translate-middle";
-  const timeBlockPos = "position-absolute top-100 start-100 translate-middle";
+  let messageSide = calcOvrPos
+    ? "justify-content-start"
+    : "justify-content-end";
+  const userTitlePos = calcOvrPos
+    ? "position-absolute top-0 start-0 translate-middle"
+    : "position-absolute top-0 start-100 translate-middle";
+  const timeBlockPos = calcOvrPos
+    ? "position-absolute top-100 start-100 translate-middle"
+    : "position-absolute top-100 start-0 translate-middle";
+
+  const sideMargin = calcOvrPos ? "message-left" : "message-right";
 
   const formatAMPM = () => {
     let hours = item.sentTime.getHours();
@@ -23,9 +32,11 @@ function Message({ item }) {
 
   return (
     <>
-      <div className={"row d-flex " + side}>
+      <div className={"row d-flex " + messageSide}>
         <div className='col-4'>
-          <div className='message p-4 rounded-2 position-relative'>
+          <div
+            className={"message p-4 rounded-2 position-relative " + sideMargin}
+          >
             <p className={"user-title " + userTitlePos}>{item.user}</p>
             <p className='message-text'>{item.messageText}</p>
             <p className={"time-block " + timeBlockPos}>{formatAMPM()}</p>
